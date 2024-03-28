@@ -2,7 +2,7 @@
     "name": "aeliot/doctrine-encrypted-field",
     "type": "symfony-bundle",
     "description": "Projects provides equipments to work with encrypted columns in database via fields of Doctrine entities",
-    "license": "proprietary",
+    "license": "MIT",
     "require": {
         "php": "^8.2",
         "ext-pdo": "*",
@@ -58,5 +58,6 @@
             "@phpstan-analyse --generate-baseline phpstan-baseline.neon --allow-empty-baseline"
         ],
         "phpstan-clear": "vendor/bin/phpstan clear-result-cache"
-    }
+    },
+    "keywords": ["doctrine", "database", "encryption", "symfony"]
 }

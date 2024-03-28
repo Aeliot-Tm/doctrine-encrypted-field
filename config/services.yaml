@@ -1,0 +1,23 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $encryptedConnections: '%aeliot.doctrine_encrypted_field.encrypted_connections%'
+
+    _instanceof:
+        Doctrine\Common\EventSubscriber:
+            tags: [ doctrine.event_subscriber ]
+
+    Aeliot\Bundle\DoctrineEncryptedField\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Doctrine,Enum,Exception,AeliotDoctrineEncryptedFieldBundle.php}'
+
+    Aeliot\Bundle\DoctrineEncryptedField\EventListener\LoadClassMetadataListener:
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
+
+    Aeliot\Bundle\DoctrineEncryptedField\Service\FunctionManager:
+        public: true
+
+    Doctrine\Persistence\ConnectionRegistry: '@Doctrine\Common\Persistence\ManagerRegistry'

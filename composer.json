@@ -5,10 +5,20 @@
     "license": "proprietary",
     "require": {
         "php": "^8.2",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "doctrine/orm": "^2.15",
+        "doctrine/persistence": "^2.0|^3.0",
+        "symfony/config": "^6.2",
+        "symfony/dependency-injection": "^6.2",
+        "symfony/http-kernel": "^6.2"
     },
     "config": {
         "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Aeliot\\Bundle\\DoctrineEncryptedField\\": "src/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

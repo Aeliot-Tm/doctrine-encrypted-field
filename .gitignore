@@ -1,0 +1,9 @@
+# But not these files...
+!.gitignore
+
+# Ignore
+.idea
+*.log
+docker-compose.override.yml
+/vendor/
+/.php-cs-fixer.cache

@@ -1,0 +1,52 @@
+{
+    "name": "aeliot/doctrine-encrypted-field",
+    "type": "symfony-bundle",
+    "description": "Projects provides equipments to work with encrypted columns in database via fields of Doctrine entities",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.2",
+        "ext-pdo": "*"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "symfony": {
+            "allow-contrib": false
+        }
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.50",
+        "phpstan/extension-installer": "^1.3",
+        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan-phpunit": "^1.3",
+        "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "^3.9"
+    },
+    "scripts": {
+        "check-all": [
+            "@cs-fixer-check",
+            "@phpcs",
+            "@phpstan"
+        ],
+        "cs-check": "@cs-fixer-check",
+        "cs-fix": "@cs-fixer-fix",
+        "cs-fixer-baseline": "bin/dev/php-cs-fixer-update-baseline",
+        "cs-fixer-check": "vendor/bin/php-cs-fixer fix --dry-run",
+        "cs-fixer-fix": "vendor/bin/php-cs-fixer fix -vv",
+        "phpcs": "vendor/bin/phpcs --standard=PSR12 src",
+        "phpcbf": "vendor/bin/phpcbf --standard=PSR12 src",
+        "phpstan": [
+            "@phpstan-clear",
+            "@phpstan-analyse"
+        ],
+        "phpstan-analyse": "vendor/bin/phpstan analyse --memory-limit=-1",
+        "phpstan-baseline": [
+            "@phpstan-clear",
+            "@phpstan-analyse --generate-baseline phpstan-baseline.neon --allow-empty-baseline"
+        ],
+        "phpstan-clear": "vendor/bin/phpstan clear-result-cache"
+    }
+}

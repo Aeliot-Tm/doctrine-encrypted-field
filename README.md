@@ -65,3 +65,9 @@ aeliot_doctrine_encrypted_field:
     functions_provider: App\Doctrine\Encryption\FunctionsProvider
     secret_provider: App\Doctrine\Encryption\SecretProvider
 ```
+
+## Database options
+
+The bundle expects options of database tables:
+- charset: utf8mb4
+- collation: utf8mb4_unicode_ci

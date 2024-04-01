@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Aeliot\Bundle\DoctrineEncryptedField\Tests\Unit\Doctrine\DBAL\Types;
 
-use Aeliot\Bundle\DoctrineEncryptedField\Doctrine\DBAL\Types\EncryptedStringType;
+use Aeliot\Bundle\DoctrineEncryptedField\Doctrine\DBAL\Types\EncryptedJsonType;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\FieldTypeEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\FunctionEnum;
 use PHPUnit\Framework\TestCase;
 
-final class EncryptedStringTypeTest extends TestCase
+final class EncryptedJsonTypeTest extends TestCase
 {
     use MockPlatformTrait;
 
     public function testCanRequireSQLConversion(): void
     {
-        $encryptedType = new EncryptedStringType();
+        $encryptedType = new EncryptedJsonType();
         self::assertTrue($encryptedType->canRequireSQLConversion());
     }
 
@@ -23,7 +23,7 @@ final class EncryptedStringTypeTest extends TestCase
     {
         $platform = $this->mockPlatform($this);
 
-        $encryptedType = new EncryptedStringType();
+        $encryptedType = new EncryptedJsonType();
         self::assertEquals(
             sprintf('%s(sqlExpr)', FunctionEnum::ENCRYPT),
             $encryptedType->convertToDatabaseValueSQL('sqlExpr', $platform)
@@ -34,7 +34,7 @@ final class EncryptedStringTypeTest extends TestCase
     {
         $platform = $this->mockPlatform($this);
 
-        $encryptedType = new EncryptedStringType();
+        $encryptedType = new EncryptedJsonType();
         self::assertEquals(
             sprintf('%s(sqlExpr)', FunctionEnum::DECRYPT),
             $encryptedType->convertToPHPValueSQL('sqlExpr', $platform)
@@ -45,23 +45,23 @@ final class EncryptedStringTypeTest extends TestCase
     {
         $platform = $this->mockPlatform($this);
 
-        $encryptedType = new EncryptedStringType();
-        self::assertEquals(255, $encryptedType->getDefaultFieldLength($platform));
+        $encryptedType = new EncryptedJsonType();
+        self::assertNull($encryptedType->getDefaultFieldLength($platform));
     }
 
     public function testGetName(): void
     {
-        $encryptedType = new EncryptedStringType();
+        $encryptedType = new EncryptedJsonType();
 
-        self::assertEquals(FieldTypeEnum::ENCRYPTED_STRING, $encryptedType->getName());
+        self::assertEquals(FieldTypeEnum::ENCRYPTED_JSON, $encryptedType->getName());
     }
 
     public function testGetSQLDeclaration(): void
     {
         $platform = $this->mockPlatform($this);
 
-        $encryptedType = new EncryptedStringType();
+        $encryptedType = new EncryptedJsonType();
         $sqlDeclaration = $encryptedType->getSQLDeclaration([], $platform);
-        self::assertEquals('BINARY_TYPE_DECLARATION', $sqlDeclaration);
+        self::assertEquals('BLOB_TYPE_DECLARATION', $sqlDeclaration);
     }
 }

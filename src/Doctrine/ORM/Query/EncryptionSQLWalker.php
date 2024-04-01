@@ -214,7 +214,8 @@ final class EncryptionSQLWalker extends SqlWalker
     private function processNullComparisonExpression(NullComparisonExpression $nullCompExpr): void
     {
         /** @var PathExpression|null $expression */
-        if (!$expression = $nullCompExpr->expression ?? null) {
+        $expression = $nullCompExpr->expression;
+        if (!$expression) {
             return;
         }
 
@@ -235,7 +236,7 @@ final class EncryptionSQLWalker extends SqlWalker
 
         $this->pathExpressionsWithSkippedDecryption[$firstExpressionHash] = $firstExpression;
 
-        if ($secondExpression->isNamed ?? false) {
+        if ($secondExpression->isNamed) {
             $secondExpressionName = $secondExpression->name;
             $this->parametersWithAdditionalEncryption[$secondExpressionName] = $secondExpressionName;
         }

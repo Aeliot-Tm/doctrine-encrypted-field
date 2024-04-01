@@ -74,3 +74,29 @@ jobs:
         run: |
           composer run phpstan-clear && \
           composer run phpstan-analyse -- --no-progress
+
+  test-unit:
+    name: 'Tests: Unit'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "8.2"
+
+      - uses: actions/checkout@v3
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v2
+
+      - name: 'Run testsuite: Unit'
+        run: composer run test-unit

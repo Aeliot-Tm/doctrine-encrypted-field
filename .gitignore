@@ -4,6 +4,7 @@
 # Ignore
 .idea
 *.log
+/.phpunit.result.cache
 docker-compose.override.yml
 /vendor/
 /.php-cs-fixer.cache

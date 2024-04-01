@@ -13,6 +13,11 @@
         "symfony/http-kernel": "^6.2"
     },
     "config": {
+        "allow-plugins": {
+            "symfony/*": true,
+            "composer/*": true,
+            "phpstan/extension-installer": true
+        },
         "sort-packages": true
     },
     "autoload": {

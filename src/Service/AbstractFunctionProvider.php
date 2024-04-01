@@ -6,7 +6,6 @@ namespace Aeliot\Bundle\DoctrineEncryptedField\Service;
 
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\DatabaseErrorEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\FunctionEnum;
-use Aeliot\Bundle\DoctrineEncryptedField\Enum\ParameterEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\PlatformEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Exception\ConfigurationException;
 use Doctrine\DBAL\Connection;
@@ -62,14 +61,13 @@ abstract class AbstractFunctionProvider implements FunctionProviderInterface
                 PlatformEnum::MYSQL => sprintf(
                     'CREATE FUNCTION %1$s() RETURNS TEXT DETERMINISTIC
                         BEGIN
-                            IF (@%2$s IS NULL OR LENGTH(@%2$s) = 0) THEN
-                                SIGNAL SQLSTATE \'%3$s\'
+                            IF (@encryption_key IS NULL OR LENGTH(@encryption_key) = 0) THEN
+                                SIGNAL SQLSTATE \'%2$s\'
                                     SET MESSAGE_TEXT = \'Encryption key not found\';
                             END IF;
-                            RETURN @%2$s;
+                            RETURN @encryption_key;
                         END;',
                     FunctionEnum::GET_ENCRYPTION_KEY,
-                    ParameterEnum::ENCRYPTION_KEY,
                     DatabaseErrorEnum::EMPTY_ENCRYPTION_KEY
                 ),
             ],

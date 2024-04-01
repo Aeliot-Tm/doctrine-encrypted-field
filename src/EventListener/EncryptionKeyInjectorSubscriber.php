@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Aeliot\Bundle\DoctrineEncryptedField\EventListener;
 
 use Aeliot\Bundle\DoctrineEncryptedField\Doctrine\DBAL\Logging\MaskingParamsSQLLogger;
-use Aeliot\Bundle\DoctrineEncryptedField\Enum\ParameterEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Exception\ConnectionException;
 use Aeliot\Bundle\DoctrineEncryptedField\Exception\SecurityConfigurationException;
 use Aeliot\Bundle\DoctrineEncryptedField\Service\ConnectionPreparerInterface;
@@ -44,13 +43,17 @@ final class EncryptionKeyInjectorSubscriber implements EventSubscriber
         $currentConnection = $event->getConnection();
         $connectionName = $this->getConnectionName($currentConnection);
         if (\in_array($connectionName, $this->encryptedConnections, true)) {
-            $key = $this->secretProvider->getSecret($connectionName);
+            $key = $this->secretProvider->getKey($connectionName);
             if (!$key) {
                 throw new SecurityConfigurationException('Project encryption key is undefined.');
             }
+            $secret = $this->secretProvider->getSecret($connectionName);
+            if (!$secret) {
+                throw new SecurityConfigurationException('Project encryption secret is undefined.');
+            }
 
             $this->maskParamsLogging($currentConnection);
-            $this->prepareConnection($currentConnection, $key);
+            $this->prepareConnection($currentConnection, $key, $secret);
         }
     }
 
@@ -74,15 +77,18 @@ final class EncryptionKeyInjectorSubscriber implements EventSubscriber
         }
     }
 
-    private function prepareConnection(Connection $currentConnection, #[\SensitiveParameter] string $key): void
-    {
+    private function prepareConnection(
+        Connection $currentConnection,
+        string $key,
+        #[\SensitiveParameter] string $secret,
+    ): void {
         $this->connectionPreparer->prepareConnection($currentConnection);
         $param = $this->connectionPreparer->wrapParameter(sprintf(':%s', self::ENCRYPTION_KEY_PARAMETER));
-        $sql = sprintf('SET @%s = %s;', ParameterEnum::ENCRYPTION_KEY, $param);
+        $sql = sprintf('SET @%s = %s;', $key, $param);
         $statement = $currentConnection->prepare($sql);
 
         try {
-            $statement->executeStatement([self::ENCRYPTION_KEY_PARAMETER => $key]);
+            $statement->executeStatement([self::ENCRYPTION_KEY_PARAMETER => $secret]);
         } catch (DBALException $exception) {
             throw new ConnectionException('Failed to inject encryption key.', 0, $exception);
         }

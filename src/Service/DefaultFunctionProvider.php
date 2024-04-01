@@ -6,4 +6,5 @@ namespace Aeliot\Bundle\DoctrineEncryptedField\Service;
 
 final class DefaultFunctionProvider extends AbstractFunctionProvider
 {
+    use DefaultFunctionDefinitionsTrait;
 }

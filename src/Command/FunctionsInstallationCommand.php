@@ -42,7 +42,7 @@ abstract class FunctionsInstallationCommand extends Command
             /** @var Connection $connection */
             $connection = $this->registry->getConnection($connectionName);
 
-            foreach ($this->functionManager->getList() as $functionName) {
+            foreach ($this->functionManager->getNames($connection) as $functionName) {
                 $this->prepare($connection, $functionName, $anOutput);
             }
         }

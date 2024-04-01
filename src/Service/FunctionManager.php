@@ -23,9 +23,9 @@ final class FunctionManager
     /**
      * @return string[]
      */
-    public function getList(): array
+    public function getNames(Connection $connection): array
     {
-        return $this->functionProvider->getList();
+        return $this->functionProvider->getNames($connection);
     }
 
     public function hasFunction(Connection $connection, string $functionName): bool

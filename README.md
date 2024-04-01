@@ -6,10 +6,8 @@ The bundle permits to encrypt separate fields of database.
 
 Call command line script to install:
 ```shell
-composer require aeliot/doctrine-encrypted-field:dev-main
+composer require aeliot/doctrine-encrypted-field
 ```
-
-NOTE: this is alpha-version, so you have to install main branch.
 
 ## Integration into project
 
@@ -65,6 +63,22 @@ aeliot_doctrine_encrypted_field:
     functions_provider: App\Doctrine\Encryption\FunctionsProvider
     secret_provider: App\Doctrine\Encryption\SecretProvider
 ```
+See example of [FunctionProvider](example/Doctrine/Encryption/FunctionProvider.php) for the project 
+with encryption key which divided on two parts:
+- one in the app and is set the database connection session
+- another one is in another database.
+
+## Key rotation
+
+1. Decrypt database by console command:
+   ```shell
+   bin/console doctrine-encrypted-field:database:decrypt
+   ```
+2. Change keys
+3. Encrypt database by console command:
+   ```shell
+   bin/console doctrine-encrypted-field:database:encrypt
+   ```
 
 ## Database options
 

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Aeliot\Bundle\DoctrineEncryptedField\Doctrine\DBAL\Types;
 
+use Aeliot\Bundle\DoctrineEncryptedField\Enum\FieldTypeEnum;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
-use Aeliot\Bundle\DoctrineEncryptedField\Enum\FieldTypeEnum;
 
 final class EncryptedStringType extends StringType implements EncryptedFieldLengthInterface
 {

@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Aeliot\Bundle\DoctrineEncryptedField\Service;
 
-use Aeliot\Bundle\DoctrineEncryptedField\Exception\ConfigurationException;
-use Doctrine\DBAL\Connection;
-use LogicException;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\DatabaseErrorEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\FunctionEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\ParameterEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\PlatformEnum;
+use Aeliot\Bundle\DoctrineEncryptedField\Exception\ConfigurationException;
+use Doctrine\DBAL\Connection;
 
 abstract class AbstractFunctionProvider implements FunctionProviderInterface
 {

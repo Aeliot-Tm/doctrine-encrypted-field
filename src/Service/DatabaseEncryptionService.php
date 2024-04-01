@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Aeliot\Bundle\DoctrineEncryptedField\Service;
 
+use Aeliot\Bundle\DoctrineEncryptedField\Enum\FieldTypeEnum;
+use Aeliot\Bundle\DoctrineEncryptedField\Enum\FunctionEnum;
+use Aeliot\Bundle\DoctrineEncryptedField\Exception\EncryptionAvailabilityException;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Persistence\Mapping\ClassMetadata;
-use Aeliot\Bundle\DoctrineEncryptedField\Enum\FieldTypeEnum;
-use Aeliot\Bundle\DoctrineEncryptedField\Enum\FunctionEnum;
-use Aeliot\Bundle\DoctrineEncryptedField\Exception\EncryptionAvailabilityException;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class DatabaseEncryptionService

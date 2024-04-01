@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Aeliot\Bundle\DoctrineEncryptedField\Command;
 
+use Aeliot\Bundle\DoctrineEncryptedField\Service\TableEncryptor;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ConnectionRegistry;
-use Aeliot\Bundle\DoctrineEncryptedField\Service\TableEncryptor;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

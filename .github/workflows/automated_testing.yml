@@ -18,6 +18,9 @@ jobs:
 
       - uses: actions/checkout@v3
 
+      - name: Set versions
+        run: cp "composer.6.2.lock" composer.lock
+
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
 
@@ -31,6 +34,9 @@ jobs:
           php-version: "8.2"
 
       - uses: actions/checkout@v3
+
+      - name: Set versions
+        run: cp "composer.6.2.lock" composer.lock
 
       - name: Cache Composer packages
         id: composer-cache
@@ -57,6 +63,9 @@ jobs:
           php-version: "8.2"
 
       - uses: actions/checkout@v3
+
+      - name: Set versions
+        run: cp "composer.6.2.lock" composer.lock
 
       - name: Cache Composer packages
         id: composer-cache

@@ -37,7 +37,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          key: "${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}"
           restore-keys: |
             ${{ runner.os }}-php-
 
@@ -63,7 +63,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          key: "${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}"
           restore-keys: |
             ${{ runner.os }}-php-
 
@@ -101,7 +101,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: vendor
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          key: "${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}"
           restore-keys: |
             ${{ runner.os }}-php-
 

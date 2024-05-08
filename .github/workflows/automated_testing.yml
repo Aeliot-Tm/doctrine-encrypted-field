@@ -79,12 +79,22 @@ jobs:
     name: 'Tests: Unit'
     runs-on: ubuntu-latest
 
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - lock-version: '5.0'
+          - lock-version: '6.2'
+
     steps:
       - uses: "shivammathur/setup-php@v2"
         with:
           php-version: "8.2"
 
       - uses: actions/checkout@v3
+
+      - name: Set versions
+        run: cp "composer.${{ matrix.lock-version }}.lock" composer.lock
 
       - name: Cache Composer packages
         id: composer-cache

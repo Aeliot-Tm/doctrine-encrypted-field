@@ -15,18 +15,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - lock-version: '5.4'
-          - lock-version: '6.2'
+          - lock-version: 5.4
+          - lock-version: 6.2
 
     steps:
-      - uses: "shivammathur/setup-php@v2"
+      - uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: 8.2
 
       - uses: actions/checkout@v3
 
       - name: Set versions
-        run: cp "composer.6.2.lock" composer.lock
+        run: cp 'composer.${{ matrix.lock-version }}.lock' composer.lock
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -36,14 +36,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: "shivammathur/setup-php@v2"
+      - uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: 8.2
 
       - uses: actions/checkout@v3
 
       - name: Set versions
-        run: cp "composer.6.2.lock" composer.lock
+        run: cp composer.6.2.lock composer.lock
 
       - name: Cache Composer packages
         id: composer-cache
@@ -65,14 +65,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: "shivammathur/setup-php@v2"
+      - uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: 8.2
 
       - uses: actions/checkout@v3
 
       - name: Set versions
-        run: cp "composer.6.2.lock" composer.lock
+        run: cp composer.6.2.lock composer.lock
 
       - name: Cache Composer packages
         id: composer-cache
@@ -99,18 +99,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - lock-version: '5.4'
-          - lock-version: '6.2'
+          - lock-version: 5.4
+          - lock-version: 6.2
 
     steps:
-      - uses: "shivammathur/setup-php@v2"
+      - uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: 8.2
 
       - uses: actions/checkout@v3
 
       - name: Set versions
-        run: cp "composer.${{ matrix.lock-version }}.lock" composer.lock
+        run: cp 'composer.${{ matrix.lock-version }}.lock' composer.lock
 
       - name: Cache Composer packages
         id: composer-cache

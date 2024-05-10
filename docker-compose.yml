@@ -1,12 +1,8 @@
-version: "3.7"
-
 services:
     php-fpm:
         build:
             context: ./
             dockerfile: .docker/php/Dockerfile
         entrypoint: [ '/app/docker-entrypoint.sh' ]
-        ports:
-            - '9003:9003'
         volumes:
             - .:/app

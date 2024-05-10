@@ -8,9 +8,9 @@
         "ext-pdo": "*",
         "doctrine/orm": "^2.15",
         "doctrine/persistence": "^2.0|^3.0",
-        "symfony/config": "^5.0|^6.0",
-        "symfony/dependency-injection": "^5.0|^6.0",
-        "symfony/http-kernel": "^5.0|^6.0"
+        "symfony/config": "^5.4|^6.0",
+        "symfony/dependency-injection": "^5.4|^6.0",
+        "symfony/http-kernel": "^5.4|^6.0"
     },
     "config": {
         "allow-plugins": {
@@ -35,7 +35,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "^5.0|^6.0"
+            "require": "^5.4|^6.0"
         }
     },
     "require-dev": {

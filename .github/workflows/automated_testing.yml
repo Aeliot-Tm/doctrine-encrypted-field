@@ -92,7 +92,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - lock-version: '5.0'
+          - lock-version: '5.4'
           - lock-version: '6.2'
 
     steps:

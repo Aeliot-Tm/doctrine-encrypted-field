@@ -23,7 +23,7 @@ jobs:
         with:
           php-version: 8.2
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set versions
         run: cp 'composer.${{ matrix.lock-version }}.lock' composer.lock
@@ -40,14 +40,14 @@ jobs:
         with:
           php-version: 8.2
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set versions
         run: cp composer.6.2.lock composer.lock
 
       - name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor
           key: "${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}"
@@ -69,14 +69,14 @@ jobs:
         with:
           php-version: 8.2
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set versions
         run: cp composer.6.2.lock composer.lock
 
       - name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor
           key: "${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}"
@@ -107,14 +107,14 @@ jobs:
         with:
           php-version: 8.2
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set versions
         run: cp 'composer.${{ matrix.lock-version }}.lock' composer.lock
 
       - name: Cache Composer packages
         id: composer-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: vendor
           key: "${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}"

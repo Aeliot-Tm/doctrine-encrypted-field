@@ -55,7 +55,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
 
       - name: Check code style
         run: composer run cs-fixer-check -- --show-progress=none
@@ -84,7 +84,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
 
       - name: Static analyze with PHPStan
         run: |
@@ -122,7 +122,7 @@ jobs:
             ${{ runner.os }}-php-
 
       - name: Install dependencies
-        uses: ramsey/composer-install@v2
+        uses: ramsey/composer-install@v3
 
       - name: 'Run testsuite: Unit'
         run: composer run test-unit

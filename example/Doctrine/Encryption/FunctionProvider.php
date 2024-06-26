@@ -32,21 +32,24 @@ final class FunctionProvider extends AbstractFunctionProvider
         $definitions = $this->defaultFunctionProvider->getDefinitions($connection);
 
         $definitions[FunctionEnum::GET_ENCRYPTION_KEY][PlatformEnum::MYSQL] = sprintf(
-            'CREATE FUNCTION %1$s() RETURNS TEXT DETERMINISTIC
-             BEGIN
-                 IF (@encryption_key IS NULL)
-                 THEN
-                     SET @encryption_key = %2$s(@%3$s);
-                 END IF;
+            'CREATE
+                FUNCTION %1$s() RETURNS TEXT
+                DETERMINISTIC
+                SQL SECURITY DEFINER
+            BEGIN
+                IF (@encryption_key IS NULL)
+                THEN
+                    SET @encryption_key = %2$s(@%3$s);
+                END IF;
 
-                 IF (@encryption_key IS NULL OR LENGTH(@encryption_key) = 0)
-                 THEN
-                     SIGNAL SQLSTATE \'%4$s\'
-                         SET MESSAGE_TEXT = \'Encryption key not found\';
-                 END IF;
+                IF (@encryption_key IS NULL OR LENGTH(@encryption_key) = 0)
+                THEN
+                    SIGNAL SQLSTATE \'%4$s\'
+                        SET MESSAGE_TEXT = \'Encryption key not found\';
+                END IF;
 
-                 RETURN @encryption_key;
-             END;',
+                RETURN @encryption_key;
+            END;',
             FunctionEnum::GET_ENCRYPTION_KEY,
             self::FUNCTION_NAME,
             self::PARAMETER_NAME,
@@ -54,29 +57,33 @@ final class FunctionProvider extends AbstractFunctionProvider
         );
 
         $definitions[self::FUNCTION_NAME][PlatformEnum::MYSQL] = sprintf(
-            'CREATE FUNCTION %1$s(env_key TEXT) RETURNS TEXT
-             LANGUAGE SQL DETERMINISTIC CONTAINS SQL SQL SECURITY DEFINER
-             BEGIN
-                 DECLARE db_key varchar(64) DEFAULT NULL;
-                 DECLARE exist_secrets_table INT DEFAULT NULL;
-                 SET db_key = NULL;
+            'CREATE
+                FUNCTION %1$s(env_key TEXT) RETURNS TEXT
+                LANGUAGE SQL
+                DETERMINISTIC
+                READS SQL DATA
+                SQL SECURITY DEFINER
+            BEGIN
+                DECLARE db_key varchar(64) DEFAULT NULL;
+                DECLARE exist_secrets_table INT DEFAULT NULL;
+                SET db_key = NULL;
 
-                 SELECT COUNT(1) INTO exist_secrets_table FROM INFORMATION_SCHEMA.TABLES
-                      WHERE TABLE_SCHEMA = "secret_database" AND TABLE_NAME = "secret_table";
+                SELECT COUNT(1) INTO exist_secrets_table FROM INFORMATION_SCHEMA.TABLES
+                     WHERE TABLE_SCHEMA = "secret_database" AND TABLE_NAME = "secret_table";
 
-                 IF (exist_secrets_table > 0)
-                 THEN
-                     SELECT secret INTO db_key
-                       FROM secret_database.secret_table WHERE id = "db_secret";
-                 END IF;
+                IF (exist_secrets_table > 0)
+                THEN
+                    SELECT secret INTO db_key
+                      FROM secret_database.secret_table WHERE id = "db_secret";
+                END IF;
 
-                 IF (exist_secrets_table > 0 AND (db_key IS NULL OR LENGTH(db_key) != 64))
-                 THEN
-                     SIGNAL SQLSTATE \'%2$s\'
-                         SET MESSAGE_TEXT = \'Cannot build key\';
-                 END IF;
+                IF (exist_secrets_table > 0 AND (db_key IS NULL OR LENGTH(db_key) != 64))
+                THEN
+                    SIGNAL SQLSTATE \'%2$s\'
+                        SET MESSAGE_TEXT = \'Cannot build key\';
+                END IF;
 
-                 RETURN CONCAT(db_key, env_key);
+                RETURN CONCAT(db_key, env_key);
             END;',
             self::FUNCTION_NAME,
             DatabaseErrorEnum::EMPTY_ENCRYPTION_KEY,

@@ -1,5 +1,8 @@
 # Doctrine Encrypted Field  Bundle
 
+
+[![WFS](https://github.com/Aeliot-Tm/doctrine-encrypted-field/actions/workflows/automated_testing.yml/badge.svg?branch=main)](https://github.com/Aeliot-Tm/doctrine-encrypted-field/actions)
+
 The bundle permits to encrypt separate fields of database.
 
 ## Installation

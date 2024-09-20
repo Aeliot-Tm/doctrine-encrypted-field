@@ -1,4 +1,4 @@
-# Doctrine Encrypted Field  Bundle
+# Doctrine Encrypted Field Bundle
 
 
 [![WFS](https://github.com/Aeliot-Tm/doctrine-encrypted-field/actions/workflows/automated_testing.yml/badge.svg?branch=main)](https://github.com/Aeliot-Tm/doctrine-encrypted-field/actions)

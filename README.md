@@ -2,6 +2,7 @@
 
 
 [![WFS](https://github.com/Aeliot-Tm/doctrine-encrypted-field/actions/workflows/automated_testing.yml/badge.svg?branch=main)](https://github.com/Aeliot-Tm/doctrine-encrypted-field/actions)
+[![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/Aeliot-Tm/doctrine-encrypted-field?label=Maintainability&labelColor=black)](https://codeclimate.com/github/Aeliot-Tm/doctrine-encrypted-field)
 [![GitHub License](https://img.shields.io/github/license/Aeliot-Tm/doctrine-encrypted-field?label=License&labelColor=black)](LICENSE)
 
 The bundle permits to encrypt separate fields of database.

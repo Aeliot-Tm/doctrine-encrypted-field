@@ -58,6 +58,7 @@
         "cs-fixer-baseline": "bin/dev/php-cs-fixer-update-baseline",
         "cs-fixer-check": "vendor/bin/php-cs-fixer fix --dry-run",
         "cs-fixer-fix": "vendor/bin/php-cs-fixer fix -vv",
+        "phive-install": "phive install --trust-gpg-keys $(cat .phive/trust-gpg-keys.txt)",
         "phpcs": "vendor/bin/phpcs --standard=PSR12 src",
         "phpcbf": "vendor/bin/phpcbf --standard=PSR12 src",
         "phpstan": [

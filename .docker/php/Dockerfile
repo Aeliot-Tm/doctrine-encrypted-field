@@ -39,14 +39,15 @@ RUN set -xe; \
 WORKDIR /app
 
 COPY composer.* ./
+COPY composer.6.2.lock ./composer.lock
 
-#RUN set -xe; \
-#    composer install --no-autoloader --no-dev --no-interaction --no-progress --no-scripts --prefer-dist && \
-#    composer clear-cache && \
-#    rm -rf ./vendor/*/*/tests
+RUN set -xe; \
+    composer install --no-autoloader --no-dev --no-interaction --no-progress --no-scripts --prefer-dist && \
+    composer clear-cache && \
+    rm -rf ./vendor/*/*/tests
 
 COPY . ./
 RUN chmod +x ./docker-entrypoint.sh && \
     rm -rf ./.docker
 
-#RUN composer dump-autoload --optimize
+RUN composer dump-autoload --optimize

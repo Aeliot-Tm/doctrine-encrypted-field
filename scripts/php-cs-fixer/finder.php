@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 return $finder = (new PhpCsFixer\Finder())
     ->files()
-    ->in(__DIR__)
+    ->ignoreVCS(true)
+    ->in(dirname(__DIR__, 2))
     ->exclude(['var', 'vendor'])
     ->append([
-        'bin/dev/php-cs-fixer-update-baseline',
+        dirname(__DIR__, 2) . '/bin/dev/php-cs-fixer-update-baseline',
     ]);
-
-
-

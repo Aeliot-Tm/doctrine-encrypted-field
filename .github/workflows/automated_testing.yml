@@ -50,15 +50,34 @@ jobs:
         uses: actions/cache@v4
         with:
           path: vendor
-          key: "${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}"
-          restore-keys: |
-            ${{ runner.os }}-php-
+          key: "os-${{ runner.os }}-php-${{ runner.php-version }}-composer-${{ hashFiles('**/composer.lock') }}"
+          restore-keys: "os-${{ runner.os }}-php-${{ runner.php-version }}-composer-"
 
       - name: Install dependencies
         uses: ramsey/composer-install@v3
 
+      - name: Cache tools installed with PHIVE
+        uses: actions/cache@v4
+        with:
+          path: "${{ runner.temp }}/.phive"
+          key: "os-${{ runner.os }}-php-${{ runner.php-version }}-phive-${{ hashFiles('**/.phive/phars.xml', '**/.phive/trust-gpg-keys.txt') }}"
+          restore-keys: "os-${{ runner.os }}-php-${{ runner.php-version }}-phive-"
+
+      - name: Install PHIVE
+        uses: szepeviktor/phive@v1
+        with:
+          home: "${{ runner.temp }}/.phive"
+          binPath: "${{ github.workspace }}/tools/phive"
+
+      - name: Install PHP tools by PHIVE
+        uses: szepeviktor/phive-install@v1
+        with:
+          home: "${{ runner.temp }}/.phive"
+          binPath: "${{ github.workspace }}/tools/phive"
+          trustGpgKeys: '$(cat ./.phive/trust-gpg-keys.txt)'
+
       - name: Check code style
-        run: composer run cs-fixer-check -- --show-progress=none
+        run: composer cs-fixer-check -- --show-progress=none
 
   phpstan:
     name: Static analyze with PHPStan

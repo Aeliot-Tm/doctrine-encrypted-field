@@ -1,8 +1,18 @@
 <?php
 
-use Symfony\Component\Finder\SplFileInfo;
+/*
+ * This file is part of the Doctrine Encrypted Field Bundle.
+ *
+ * (c) Anatoliy Melnikov <5785276@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
-require_once __DIR__ . '/.php-cs-fixer-baseline.php';
+use Aeliot\PhpCsFixerBaseline\Service\FilterFactory;
+
+Phar::loadPhar(dirname(__DIR__, 2) . '/tools/pcsf-baseline.phar', 'pcsf-baseline.phar');
+require_once 'phar://pcsf-baseline.phar/vendor/autoload.php';
 
 $rules = [
     '@Symfony' => true,
@@ -34,16 +44,11 @@ $rules = [
 
 $config = (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
+    ->setCacheFile(dirname(__DIR__, 2) . '/var/.php-cs-fixer.cache')
     ->setRules($rules);
 
-$baseline = cs_fixer_get_baseline_hashes($config);
 /** @var PhpCsFixer\Finder $finder */
-$finder = require __DIR__ . '/.php-cs-fixer-finder.php';
-$finder->filter(static function (SplFileInfo $file) use ($baseline): bool {
-    $pathname = $file->getPathname();
-    $hash = ($baseline[$pathname] ?? [])['hash'] ?? null;
-
-    return (null === $hash) || (cs_fixer_get_path_hash($pathname) !== $hash);
-});
+$finder = require __DIR__ . '/finder.php';
+$finder->filter((new FilterFactory())->createFilter(__DIR__ . '/.php-cs-fixer-baseline.json', $config));
 
 return $config->setFinder($finder);

@@ -39,7 +39,6 @@
         }
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.50",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan": "^1.10",
         "phpstan/phpstan-phpunit": "^1.3",
@@ -55,9 +54,9 @@
         ],
         "cs-check": "@cs-fixer-check",
         "cs-fix": "@cs-fixer-fix",
-        "cs-fixer-baseline": "bin/dev/php-cs-fixer-update-baseline",
-        "cs-fixer-check": "vendor/bin/php-cs-fixer fix --dry-run",
-        "cs-fixer-fix": "vendor/bin/php-cs-fixer fix -vv",
+        "cs-fixer-baseline": "XDEBUG_MODE=off tools/pcsf-baseline.phar -b scripts/php-cs-fixer/baseline.json -c scripts/php-cs-fixer/config.php -f scripts/php-cs-fixer/finder.php",
+        "cs-fixer-check": "@cs-fixer-fix --dry-run",
+        "cs-fixer-fix": "tools/php-cs-fixer.phar fix -vv --config=scripts/php-cs-fixer/config.php",
         "phive-install": "phive install --trust-gpg-keys $(cat .phive/trust-gpg-keys.txt)",
         "phpcs": "vendor/bin/phpcs --standard=PSR12 src",
         "phpcbf": "vendor/bin/phpcbf --standard=PSR12 src",

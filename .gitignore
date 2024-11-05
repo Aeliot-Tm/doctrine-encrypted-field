@@ -7,6 +7,6 @@
 /.phpunit.result.cache
 docker-compose.override.yml
 /tools/
+/var/
 /vendor/
-/.php-cs-fixer.cache
 /composer.lock

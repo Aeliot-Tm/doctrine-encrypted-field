@@ -4,6 +4,7 @@
 /.docker        export-ignore
 /.github        export-ignore
 /example        export-ignore
+/scripts        export-ignore
 /tests          export-ignore
 /var            export-ignore
 /.editorconfig               export-ignore
@@ -11,9 +12,7 @@
 /.gitignore                  export-ignore
 /composer.5.4.lock           export-ignore
 /composer.6.2.lock           export-ignore
-/.php-cs-fixer.dist.php      export-ignore
 /.php-cs-fixer-baseline.php  export-ignore
-/.php-cs-fixer-finder.php    export-ignore
 /.yamllint.yaml              export-ignore
 /composer.lock               export-ignore
 /docker-compose.yml          export-ignore

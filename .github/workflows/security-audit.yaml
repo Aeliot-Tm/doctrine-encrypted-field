@@ -21,6 +21,9 @@ jobs:
 
       - uses: actions/checkout@v4
 
+      - name: Prepare composer.lock from scratch
+        run: cp composer.6.2.lock composer.lock
+
       - name: 'Check security vulnerabilities'
         run: composer audit --locked
 

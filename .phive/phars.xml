@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phive xmlns="https://phar.io/phive">
+  <phar name="composer-unused" version="^0.8.11" installed="0.8.11" location="./tools/composer-unused.phar" copy="true"/>
   <phar name="php-cs-fixer" version="3.52.1" installed="3.52.1" location="./tools/php-cs-fixer.phar" copy="true"/>
   <phar name="php-cs-fixer-baseline" version="^2.1.2" installed="2.1.2" location="./tools/pcsf-baseline.phar" copy="true"/>
 </phive>

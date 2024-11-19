@@ -70,7 +70,8 @@
             "@phpstan-analyse --generate-baseline scripts/phpstan/baseline.neon --allow-empty-baseline"
         ],
         "phpstan-clear": "vendor/bin/phpstan clear-result-cache",
-        "test-unit": "vendor/bin/phpunit --testsuite unit -v"
+        "test-unit": "vendor/bin/phpunit --testsuite unit -v",
+        "unused": "XDEBUG_MODE=off tools/composer-unused.phar unused -c ./scripts/composer-unused/config.php"
     },
     "keywords": ["doctrine", "database", "encryption", "symfony"]
 }

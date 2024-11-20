@@ -1,0 +1,26 @@
+{
+    "symbol-whitelist": [
+        "Doctrine\\Common\\EventSubscriber",
+        "Doctrine\\DBAL\\Connection",
+        "Doctrine\\DBAL\\Events",
+        "Doctrine\\DBAL\\Event\\ConnectionEventArgs",
+        "Doctrine\\DBAL\\Exception",
+        "Doctrine\\DBAL\\Logging\\SQLLogger",
+        "Doctrine\\DBAL\\Platforms\\AbstractPlatform",
+        "Doctrine\\DBAL\\Types\\DateImmutableType",
+        "Doctrine\\DBAL\\Types\\DateTimeImmutableType",
+        "Doctrine\\DBAL\\Types\\DateTimeType",
+        "Doctrine\\DBAL\\Types\\DateType",
+        "Doctrine\\DBAL\\Types\\JsonType",
+        "Doctrine\\DBAL\\Types\\StringType",
+        "Doctrine\\DBAL\\Types\\TextType",
+        "Doctrine\\DBAL\\Types\\Type",
+        "Symfony\\Component\\Console\\Attribute\\AsCommand",
+        "Symfony\\Component\\Console\\Command\\Command",
+        "Symfony\\Component\\Console\\Input\\InputArgument",
+        "Symfony\\Component\\Console\\Input\\InputInterface",
+        "Symfony\\Component\\Console\\Input\\InputOption",
+        "Symfony\\Component\\Console\\Output\\NullOutput",
+        "Symfony\\Component\\Console\\Output\\OutputInterface"
+    ]
+}

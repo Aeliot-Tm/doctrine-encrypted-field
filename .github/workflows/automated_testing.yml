@@ -250,4 +250,4 @@ jobs:
       - name: Yamllint Action
         uses: ansible-actions/yamllint-action@v0.0.2
         with:
-          target: "-c .yamllint.yaml --no-warning ./"
+          target: "-c .yamllint.yaml --no-warning ./*"

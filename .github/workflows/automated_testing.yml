@@ -239,3 +239,15 @@ jobs:
 
       - name: 'Run testsuite: Unit'
         run: composer run test-unit
+
+  yamllint:
+    name: 'Yamllint'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: yamllint
+        uses: nosborn/github-action-yamllint@v1
+        with:
+          config_file: .yamllint.yaml

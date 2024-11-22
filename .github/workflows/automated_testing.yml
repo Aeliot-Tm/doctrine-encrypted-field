@@ -247,7 +247,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: yamllint
-        uses: nosborn/github-action-yamllint@v1
+      - name: Yamllint Action
+        uses: ansible-actions/yamllint-action@v0.0.2
         with:
-          config_file: .yamllint.yaml
+          target: "--config-file=.yamllint.yaml --no-warning ./"

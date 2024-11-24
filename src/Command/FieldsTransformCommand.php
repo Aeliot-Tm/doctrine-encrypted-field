@@ -34,7 +34,11 @@ abstract class FieldsTransformCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument('connection', InputArgument::REQUIRED, 'Connection name');
+        /* TODO: process list of connections
+         *       1. accept array of connections
+         *       2. use list of encrypted connections (`...encrypted_connections`) as default value
+         */
+        $this->addArgument('connection', InputArgument::OPTIONAL, 'Connection name');
         $this->addOption(
             'fields',
             null,
@@ -48,7 +52,7 @@ abstract class FieldsTransformCommand extends Command
     {
         $anOutput = $input->getOption('dump-sql') ? $output : new NullOutput();
         /** @var Connection $connection */
-        $connection = $this->registry->getConnection($input->getArgument('connection'));
+        $connection = $this->registry->getConnection($this->getConnectionName($input));
         $tableFields = $input->getOption('fields');
         $function = $this->getFunction();
 
@@ -62,4 +66,17 @@ abstract class FieldsTransformCommand extends Command
     }
 
     abstract protected function getFunction(): string;
+
+    private function getConnectionName(InputInterface $input): string
+    {
+        $connectionName = $input->getArgument('connection');
+        if (!$connectionName) {
+            if (1 < \count($this->registry->getConnections())) {
+                throw new \DomainException('Option "connection" is required when configured more then one');
+            }
+            $connectionName = $this->registry->getDefaultConnectionName();
+        }
+
+        return $connectionName;
+    }
 }

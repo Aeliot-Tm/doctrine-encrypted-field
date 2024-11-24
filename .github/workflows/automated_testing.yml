@@ -17,6 +17,7 @@ jobs:
         include:
           - lock-version: 5.4
           - lock-version: 6.2
+          - lock-version: 7.1
 
     steps:
       - uses: shivammathur/setup-php@v2
@@ -210,6 +211,7 @@ jobs:
         include:
           - lock-version: 5.4
           - lock-version: 6.2
+          - lock-version: 7.1
 
     steps:
       - uses: shivammathur/setup-php@v2

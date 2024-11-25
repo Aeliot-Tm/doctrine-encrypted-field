@@ -17,6 +17,7 @@ jobs:
         include:
           - lock-version: 5.4
           - lock-version: 6.2
+          - lock-version: 6.4
           - lock-version: 7.1
 
     steps:
@@ -211,6 +212,7 @@ jobs:
         include:
           - lock-version: 5.4
           - lock-version: 6.2
+          - lock-version: 6.4
           - lock-version: 7.1
 
     steps:

@@ -250,4 +250,4 @@ jobs:
       - name: Yamllint Action
         uses: bewuethr/yamllint-action@v1.3.0
         with:
-          config-file: .yamllint.yaml
+          config-file: scripts/yamllint.yaml

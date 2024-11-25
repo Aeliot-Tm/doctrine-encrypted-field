@@ -243,11 +243,14 @@ jobs:
   yamllint:
     name: 'Yamllint'
     runs-on: ubuntu-latest
+    container:
+      image: cytopia/yamllint:latest
+      volumes:
+        - ${{ github.workspace }}:/data
+      options: --cpus 1
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Yamllint Action
-        uses: ansible-actions/yamllint-action@v0.0.2
-        with:
-          target: "-c .yamllint.yaml --no-warning ./*"
+        run: yamllint -c .yamllint.yaml --no-warning ./*

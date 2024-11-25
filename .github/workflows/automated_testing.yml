@@ -243,14 +243,11 @@ jobs:
   yamllint:
     name: 'Yamllint'
     runs-on: ubuntu-latest
-    container:
-      image: cytopia/yamllint:latest
-      volumes:
-        - ${{ github.workspace }}:/data
-      options: --cpus 1
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Yamllint Action
-        run: yamllint -c .yamllint.yaml --no-warning ./*
+        uses: bewuethr/yamllint-action@v1.3.0
+        with:
+          config-file: .yamllint.yaml

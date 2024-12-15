@@ -16,9 +16,9 @@ namespace Aeliot\Bundle\DoctrineEncryptedField\Tests\Unit\Doctrine\ORM\Query\AST
 use Aeliot\Bundle\DoctrineEncryptedField\Doctrine\ORM\Query\AST\Functions\AELIOT\DecryptFunction;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\FunctionEnum;
 use Doctrine\ORM\Query\AST\SimpleArithmeticExpression;
-use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
+use Doctrine\ORM\Query\TokenType;
 use PHPUnit\Framework\TestCase;
 
 final class DecryptFunctionTest extends TestCase
@@ -35,9 +35,9 @@ final class DecryptFunctionTest extends TestCase
         $parser->expects($this->exactly(3))
             ->method('match')
             ->withConsecutive(
-                [Lexer::T_IDENTIFIER],
-                [Lexer::T_OPEN_PARENTHESIS],
-                [Lexer::T_CLOSE_PARENTHESIS],
+                [TokenType::T_IDENTIFIER],
+                [TokenType::T_OPEN_PARENTHESIS],
+                [TokenType::T_CLOSE_PARENTHESIS],
             );
 
         $function->parse($parser);

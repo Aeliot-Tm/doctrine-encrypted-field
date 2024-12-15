@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace Aeliot\Bundle\DoctrineEncryptedField\Service;
 
-use Aeliot\Bundle\DoctrineEncryptedField\Enum\DatabaseErrorEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\FunctionEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\PlatformEnum;
 use Doctrine\DBAL\Connection;
@@ -60,13 +59,12 @@ trait DefaultFunctionDefinitionsTrait
                         SQL SECURITY DEFINER
                     BEGIN
                         IF (@encryption_key IS NULL OR LENGTH(@encryption_key) = 0) THEN
-                            SIGNAL SQLSTATE \'%2$s\'
+                            SIGNAL SQLSTATE \'PEKEY\'
                                 SET MESSAGE_TEXT = \'Encryption key not found\';
                         END IF;
                         RETURN @encryption_key;
                     END;',
                     FunctionEnum::GET_ENCRYPTION_KEY,
-                    DatabaseErrorEnum::EMPTY_ENCRYPTION_KEY
                 ),
             ],
         ];

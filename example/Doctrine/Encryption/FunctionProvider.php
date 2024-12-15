@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Doctrine\Encryption;
 
-use Aeliot\Bundle\DoctrineEncryptedField\Enum\DatabaseErrorEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\FunctionEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Enum\PlatformEnum;
 use Aeliot\Bundle\DoctrineEncryptedField\Service\AbstractFunctionProvider;
@@ -53,7 +52,7 @@ final class FunctionProvider extends AbstractFunctionProvider
 
                 IF (@encryption_key IS NULL OR LENGTH(@encryption_key) = 0)
                 THEN
-                    SIGNAL SQLSTATE \'%4$s\'
+                    SIGNAL SQLSTATE \'PEKEY\'
                         SET MESSAGE_TEXT = \'Encryption key not found\';
                 END IF;
 
@@ -62,7 +61,6 @@ final class FunctionProvider extends AbstractFunctionProvider
             FunctionEnum::GET_ENCRYPTION_KEY,
             self::FUNCTION_NAME,
             self::PARAMETER_NAME,
-            DatabaseErrorEnum::EMPTY_ENCRYPTION_KEY,
         );
 
         $definitions[self::FUNCTION_NAME][PlatformEnum::MYSQL] = sprintf(
@@ -88,14 +86,13 @@ final class FunctionProvider extends AbstractFunctionProvider
 
                 IF (exist_secrets_table > 0 AND (db_key IS NULL OR LENGTH(db_key) != 64))
                 THEN
-                    SIGNAL SQLSTATE \'%2$s\'
+                    SIGNAL SQLSTATE \'PEKEY\'
                         SET MESSAGE_TEXT = \'Cannot build key\';
                 END IF;
 
                 RETURN CONCAT(db_key, env_key);
             END;',
             self::FUNCTION_NAME,
-            DatabaseErrorEnum::EMPTY_ENCRYPTION_KEY,
         );
 
         return $definitions;

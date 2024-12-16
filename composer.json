@@ -3,14 +3,6 @@
     "type": "symfony-bundle",
     "description": "Projects provides equipments to work with encrypted columns in database via fields of Doctrine entities",
     "license": "MIT",
-    "config": {
-        "allow-plugins": {
-            "symfony/*": true,
-            "composer/*": true,
-            "phpstan/extension-installer": true
-        },
-        "sort-packages": true
-    },
     "autoload": {
         "psr-4": {
             "Aeliot\\Bundle\\DoctrineEncryptedField\\": "src/"
@@ -21,14 +13,22 @@
             "Aeliot\\Bundle\\DoctrineEncryptedField\\Tests\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "symfony/*": true,
+            "composer/*": true,
+            "phpstan/extension-installer": true
+        },
+        "sort-packages": true
+    },
     "extra": {
         "symfony": {
             "allow-contrib": false,
             "require": "^5.4|^6.0|^7.0"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^8.2",
         "ext-pdo": "*",

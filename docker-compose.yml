@@ -1,8 +1,25 @@
+networks:
+    def_test: { }
+
 services:
     php-fpm:
         build:
             context: ./
             dockerfile: .docker/php/Dockerfile
         entrypoint: [ '/app/docker-entrypoint.sh' ]
+        networks:
+            - def_test
         volumes:
             - .:/app
+
+    mysql:
+        image: mysql:8.0
+        networks:
+            - def_test
+        environment:
+            - "MYSQL_ALLOW_EMPTY_PASSWORD=true"
+            - "MYSQL_USER=def"
+            - "MYSQL_PASSWORD=def"
+            - "MYSQL_DATABASE=def"
+        ports:
+            - "3306:3306"

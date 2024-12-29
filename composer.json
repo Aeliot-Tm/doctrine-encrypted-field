@@ -3,6 +3,11 @@
     "type": "symfony-bundle",
     "description": "Projects provides equipments to work with encrypted columns in database via fields of Doctrine entities",
     "license": "MIT",
+    "abandoned": "aeliot/doctrine-encrypted-bundle",
+    "_comment": [
+        "Migrate to using of package aeliot/doctrine-encrypted-bundle, please.",
+        "This one will be totally removed after the Public Holidays 2024/2025."
+    ],
     "require": {
         "php": "^8.2",
         "ext-pdo": "*",

@@ -1,0 +1,14 @@
+{
+    "name": "aeliot/doctrine-encrypted-field",
+    "type": "library",
+    "description": "Project is closed",
+    "license": "MIT",
+    "abandoned": "aeliot/doctrine-encrypted-bundle",
+    "_comment": [
+        "Migrate to using of package aeliot/doctrine-encrypted-bundle, please.",
+        "This one will be totally removed after the Public Holidays 2024/2025."
+    ],
+    "require": {
+        "php": "^8.2"
+    }
+}
